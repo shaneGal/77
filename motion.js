@@ -47,10 +47,10 @@ io.on('connection', function(socket){
     	led.off();
     	//console.log("motionend");     	
     	duration = (endTime - startTime) /1000 ;
-    	if (duration > 4) {
+    	if (duration > 1) {
     		console.log("long motion" + duration);
             longMotion ++;	
-            io.socket.emit('broadcast',{ description: longMotion + 'long motion'});
+            io.sockets.emit('broadcast',{ description: longMotion + 'long motion'});
     	} else {
     		console.log("short motion" + duration);
             shortMotion ++;
