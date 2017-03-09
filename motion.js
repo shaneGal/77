@@ -2,7 +2,7 @@
 var five = require("johnny-five"); // import johnny-five
 
 
-// 
+// for creating server 
 var app = require("express")(); // express library
 var http = require('http').Server(app);
 var io = require("socket.io")(http);
@@ -11,16 +11,13 @@ var io = require("socket.io")(http);
 app.get('/', function(req, res) {  
         res.sendFile(__dirname + '/client.html');
 });
- 
- 
+  
 
-
-
-var startTime;
-var endTime;
-var duration;
-var longMotion = 0 ;
-var shortMotion = 0;
+var startTime; // logs start time
+var endTime; // logs end time
+var duration; // stores total motion time 
+var longMotion = 0; // records long motions
+var shortMotion = 0; // records short motions
 
 
 var board = new five.Board(); // creates board object
@@ -34,7 +31,7 @@ board.on("ready",function() {
 		//console.log("calibrated");
 	});
 
-io.on('connection', function(socket){
+io.on('connection', function(socket){ // need to review this function
 	motion.on("motionstart", function() {
     	startTime = Date.now();
     	//console.log("motionstart");
@@ -47,16 +44,15 @@ io.on('connection', function(socket){
     	led.off();
     	//console.log("motionend");     	
     	duration = (endTime - startTime) /1000 ;
-    	if (duration > 1) {
+    	if (duration > 2) {
     		console.log("long motion" + duration);
-            longMotion ++;	
-            io.sockets.emit('broadcast',{ description: longMotion + 'long motion'});
+            longMotion ++; 	
+            io.sockets.emit('longM',{ descriptionLong: longMotion + 'long motion'},1000);
     	} else {
     		console.log("short motion" + duration);
             shortMotion ++;
-    	}
-    	
-    	
+            io.sockets.emit('shortM',{ descriptionShort: shortMotion + 'short motion'},1000);
+    	}	
   	});
     });
 

@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
-	<head><title>Hello world</title></head>
+	<head><title>Motion sensor</title></head>
 	<script src="/socket.io/socket.io.js"></script>
-	<script>
+	<br><script>
 	  var socket = io();
-	  socket.on('broadcast',function(data){
-			  document.body.innerHTML = '';
-			  document.write(data.description);
+	  socket.on('longM',function(data){
+			  document.body.outerHTML = '';
+			  document.write(data.descriptionLong);
 	  });
-	</script>
-	<body>Hello world</body>
+	</script></br>
+		<br><script>
+	  socket.on('shortM',function(data){
+			  document.body.innerHTML = '';
+			  document.write(data.descriptionShort);
+	  });
+	</script></br>
+	<body>Motion sensor</body>
 </html>
