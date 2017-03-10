@@ -47,11 +47,11 @@ io.on('connection', function(socket){ // need to review this function
     	if (duration > 2) {
     		console.log("long motion" + duration);
             longMotion ++; 	
-            io.sockets.emit('longM',{ descriptionLong: longMotion + 'long motion'},1000);
+            io.sockets.emit('longM',{ descriptionLong: longMotion + ' long motion'},1000);
     	} else {
     		console.log("short motion" + duration);
             shortMotion ++;
-            io.sockets.emit('shortM',{ descriptionShort: shortMotion + 'short motion'},1000);
+            io.sockets.emit('shortM',{ descriptionShort: shortMotion + ' short motion'},1000);
     	}	
   	});
     });
