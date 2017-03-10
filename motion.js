@@ -18,7 +18,7 @@ var endTime; // logs end time
 var duration; // stores total motion time 
 var longMotion = 0; // records long motions
 var shortMotion = 0; // records short motions
-
+var ledSwitch = true; // 
 
 var board = new five.Board(); // creates board object
 
@@ -35,7 +35,8 @@ io.on('connection', function(socket){ // need to review this function
 	motion.on("motionstart", function() {
     	startTime = Date.now();
     	//console.log("motionstart");
-    	led.on();    	
+    	if (ledSwitch){ // prevent led from turning on if switched off
+            led.on()};    	
   	});
 
 
@@ -44,14 +45,14 @@ io.on('connection', function(socket){ // need to review this function
     	led.off();
     	//console.log("motionend");     	
     	duration = (endTime - startTime) /1000 ;
-    	if (duration > 2) {
+    	if (duration > 4) {
     		console.log("long motion" + duration);
             longMotion ++; 	
-            io.sockets.emit('longM',{ descriptionLong: longMotion + ' long motion'},1000);
+            io.sockets.emit('longM',{ descriptionLong: longMotion + 'long motion'}); // adding a delay created too many motions
     	} else {
     		console.log("short motion" + duration);
             shortMotion ++;
-            io.sockets.emit('shortM',{ descriptionShort: shortMotion + ' short motion'},1000);
+            io.sockets.emit('shortM',{ descriptionShort: shortMotion + 'short motion'});
     	}	
   	});
     });
@@ -61,3 +62,8 @@ io.on('connection', function(socket){ // need to review this function
 http.listen(3000, function(){; 
 console.log('Server available at http://localhost:3000' );
 });  
+
+
+function motionoff() {
+    
+}
