@@ -118,9 +118,9 @@ div.panel-body {
         
         function ledstate() {
             if (led.checked == true) {
-                socket.emit('led',true);
+                socket.emit('led',{ledState:true});
             }else if(led.checked == false) {
-                socket.emit('led',false);
+                socket.emit('led',{ledState:false});
             };
         };
 
