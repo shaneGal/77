@@ -1,0 +1,139 @@
+<html lang="en">
+    <head>
+        <title>Control Panel</title>
+        <!--Socket IO-->
+        <script src="/socket.io/socket.io.js"></script>
+        <style>
+input[type="checkbox"] {
+    visibility: hidden;
+}
+
+label.switch {
+    position: relative;
+    height: 50px;
+    width: 100px;
+    display: block;
+    background: grey;
+    border-radius: 100px;
+    margin: auto;
+}
+
+label.switch:after {
+    content: '';
+    position: absolute;
+    background: white;
+    top: 5px;
+    left: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+label.switch:before {
+    content: 'OFF';
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+input:checked + label.switch {
+    background: #bada55;
+}
+
+input:checked + label.switch:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+input:checked + label.switch:before {
+    content: 'ON';
+    left: calc(0% - 15px);
+}
+
+div.container {
+    width: 50%;  
+    font-family: Arial;
+    margin: auto;
+}
+
+div.panel-header {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #bada55;
+  background: #bada55;
+  text-align: center;
+}
+
+div.panel-body {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #9a9a9a;
+    text-align: center;
+}
+</style>
+        
+        <!--Switch Script-->
+        <script>
+            function loadState(){
+                /*When the webpage loads, grab state of LED and Motion Sensor (On or Off?)*/
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="panel-header">Control Panel</div>
+            <div class="panel-body">
+                <label>LED Switch</label>
+                <input type="checkbox" id="ledswitch" onclick="ledstate()">
+                <label for="ledswitch" class="switch"></label>
+                <label>Motion Sensor Switch</label>
+                <input type="checkbox" id="msswitch" onclick="msstate()">
+                <label for="msswitch" class="switch"></label>
+                <label>Motions Detected</label>
+                <p id="#motion"></p>
+                <label>Long Motions</label>
+                <p id="long"></p>
+                <label>Short Motions</label>
+                <p id="short"></p>
+            </div>   
+        </div>
+    <script>
+        var socket = io();
+        /*
+        socket.on('motion', function(m) {
+            document.getElementById("#motion").innerHTML = m;
+        });
+        */
+        socket.on('longM', function(l) {
+            document.getElementById("long").innerHTML = l.descriptionLong;
+        });
+        
+        socket.on('shortM', function(s) {
+            document.getElementById("short").innerHTML = s.descriptionLong;
+        });
+        /*
+        var led  = document.getElementById("ledswitch");
+        
+        function ledstate() {
+            if (led.checked == true) {
+                socket.emit('led',true);
+            }else if(led.checked == false) {
+                socket.emit('led',false);
+            };
+        };
+
+        var ms = document.getElementById("msswitch");
+
+        function msstate() {
+            if (ms.checked == true) {
+                socket.emit('ms',true);
+            }else if(ms.checked == false) {
+                socket.emit('ms',false);
+            };
+        };
+        */
+    </script>
+    </body>
+</html>
