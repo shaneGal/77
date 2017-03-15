@@ -101,19 +101,19 @@ div.panel-body {
         </div>
     <script>
         var socket = io();
-        /*
+        
         socket.on('motion', function(m) {
             document.getElementById("#motion").innerHTML = m;
         });
-        */
-        socket.on('longM', function(l) {
-            document.getElementById("long").innerHTML = l.descriptionLong;
+        
+        socket.on('longM', function(long) {
+            document.getElementById("long").innerHTML = long.descriptionLong;
         });
         
-        socket.on('shortM', function(s) {
-            document.getElementById("short").innerHTML = s.descriptionLong;
+        socket.on('shortM', function(short) {
+            document.getElementById("short").innerHTML = short.descriptionShort;
         });
-        /*
+        
         var led  = document.getElementById("ledswitch");
         
         function ledstate() {
@@ -125,7 +125,7 @@ div.panel-body {
         };
 
         var ms = document.getElementById("msswitch");
-
+        /*
         function msstate() {
             if (ms.checked == true) {
                 socket.emit('ms',true);
