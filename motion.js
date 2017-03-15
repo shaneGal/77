@@ -18,7 +18,7 @@ var endTime; // logs end time
 var duration; // stores total motion time 
 var longMotion = 0; // records long motions
 var shortMotion = 0; // records short motions
-
+var ledOn = true;
 
 var board = new five.Board(); // creates board object
 
@@ -32,10 +32,20 @@ board.on("ready",function() {
 	});
 
 io.on('connection', function(socket){ // need to review this function
+	socket.on('led', function(data){
+		if (data.ledState == true) {
+			ledOn = true;
+		} else if (data.ledState == false) {
+			ledOn = false;
+		};
+	});
+
 	motion.on("motionstart", function() {
     	startTime = Date.now();
     	console.log("motionstart");
-    	led.on();    	
+		if (ledOn == true) {
+	    	led.on();
+		};    	
   	});
 
 
@@ -54,10 +64,8 @@ io.on('connection', function(socket){ // need to review this function
             io.sockets.emit('shortM',{ descriptionShort: shortMotion});
     	}	
   	});
-    });
-
 });
 
-http.listen(3000, function(){; 
-console.log('Server available at http://localhost:3000' );
-});
+http.listen(3000, function(){ 
+	console.log('Server available at http://localhost:3000')
+});});
