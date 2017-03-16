@@ -4,10 +4,9 @@
         <!--Socket IO-->
         <script src="/socket.io/socket.io.js"></script>
         <style>
-input[type="checkbox"] {
+            input[type="checkbox"] {
     visibility: hidden;
 }
-
 label.switch {
     position: relative;
     height: 50px;
@@ -17,7 +16,6 @@ label.switch {
     border-radius: 100px;
     margin: auto;
 }
-
 label.switch:after {
     content: '';
     position: absolute;
@@ -29,7 +27,6 @@ label.switch:after {
     border-radius: 90px;
     transition: 0.3s;
 }
-
 label.switch:before {
     content: 'OFF';
     font-weight: bold;
@@ -37,27 +34,22 @@ label.switch:before {
     top: 15px;
     right: 15px;
 }
-
 input:checked + label.switch {
     background: #bada55;
 }
-
 input:checked + label.switch:after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
 }
-
 input:checked + label.switch:before {
     content: 'ON';
     left: calc(0% - 15px);
 }
-
 div.container {
     width: 50%;  
     font-family: Arial;
     margin: auto;
 }
-
 div.panel-header {
   border-style: solid;
   border-width: 2px;
@@ -65,7 +57,6 @@ div.panel-header {
   background: #bada55;
   text-align: center;
 }
-
 div.panel-body {
     border-style: solid;
     border-width: 2px;
@@ -86,24 +77,24 @@ div.panel-body {
             <div class="panel-header">Control Panel</div>
             <div class="panel-body">
                 <label>LED Switch</label>
-                <input type="checkbox" id="ledswitch" onclick="ledstate()">
+                <input type="checkbox" id="ledswitch" onclick="ledstate()" checked>
                 <label for="ledswitch" class="switch"></label>
                 <label>Motion Sensor Switch</label>
-                <input type="checkbox" id="msswitch" onclick="msstate()">
+                <input type="checkbox" id="msswitch" onclick="msstate()" checked>
                 <label for="msswitch" class="switch"></label>
                 <label>Motions Detected</label>
-                <p id="#motion"></p>
+                <p id="m">0</p>
                 <label>Long Motions</label>
-                <p id="long"></p>
+                <p id="long">0</p>
                 <label>Short Motions</label>
-                <p id="short"></p>
+                <p id="short">0</p>
             </div>   
         </div>
     <script>
         var socket = io();
         
         socket.on('motion', function(m) {
-            document.getElementById("#motion").innerHTML = m;
+            document.getElementById("m").innerHTML = m.motionNum;
         });
         
         socket.on('longM', function(long) {
@@ -123,17 +114,16 @@ div.panel-body {
                 socket.emit('led',{ledState:false});
             };
         };
-
         var ms = document.getElementById("msswitch");
-        /*
+        
         function msstate() {
             if (ms.checked == true) {
-                socket.emit('ms',true);
+                socket.emit('ms',{motionState:true});
             }else if(ms.checked == false) {
-                socket.emit('ms',false);
+                socket.emit('ms',{motionState:false});
             };
         };
-        */
+        
     </script>
     </body>
 </html>
