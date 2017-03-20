@@ -1,3 +1,5 @@
+
+
 <html lang="en">
 
 <head>
@@ -91,11 +93,11 @@
         <div class="panel-body">
 
             <label>LED Switch</label>
-            <input type="checkbox" id="ledswitch" onclick="ledstate()" checked><!--Invisible checkbox-->
+            <input type="checkbox" id="ledswitch" onclick="ledstate()" ><!--Invisible checkbox-->
             <label for="ledswitch" class="switch"></label><!--Toggle switch-->
 
             <label>Motion Sensor Switch</label>
-            <input type="checkbox" id="msswitch" onclick="msstate()" checked>
+            <input type="checkbox" id="msswitch" onclick="msstate()">
             <label for="msswitch" class="switch"></label>
 
             <label>Motions Detected</label>
@@ -115,18 +117,14 @@
                                                           socket.on('motion', function (m) {
                                                               document.getElementById("m").innerHTML = m.motionNum;
                                                           });
-
                                                           socket.on('longM', function (long) {
                                                               document.getElementById("long").innerHTML = long.descriptionLong;
                                                           });
-
                                                           socket.on('shortM', function (short) {
                                                               document.getElementById("short").innerHTML = short.descriptionShort;
                                                           });
-
                                                           //This section is an event handler for a click on the toggle switch.
                                                           var led = document.getElementById("ledswitch"); //Retrieve checkbox element from HTML and set as a class
-
                                                           //Sends a request to server to change the LED state
                                                           function ledstate() {
                                                               if (led.checked == true) {
@@ -136,7 +134,6 @@
                                                               };
                                                           };
                                                           var ms = document.getElementById("msswitch");
-
                                                           //Sends a request to server to change the motion sensor state.
                                                           function msstate() {
                                                               if (ms.checked == true) {
