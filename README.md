@@ -12,7 +12,7 @@ To setup the board:
 		3. Open Arduino and go to: File --> Examples --> Firmata and select StandardFirmata.
 		4. Verify and upload.
 
-There are two files: motion.js (acts as a server) and control.html (acts as a client).
+
 
 The program requires the following packages:
 	- johnny-five
@@ -23,5 +23,13 @@ To install the mentioned packages:
 	- Open console (command prompt).
 	- Use the following line: "npm install johnny-five express socket io".
 
+There are two files: motion.js (acts as a server) and control.html (acts as a client). The server processes input data
+from the PIR and then sends that information to the client. The client then simply displays the result (number of motions,
+number of long motions and number of short motions. The client receives user inputs from the html elements and is emitted
+to the server. The server responds accordingly (turn LED/PIR on or off).
+
 The server is hosted on localhost:3000. Type in the web browser: http://localhost:3000, as opening the html file directly
-does not enable the program to work. 
+does not enable the program to work.
+
+Issues:
+	- html cannot load an external css file when accessing through local host. Solution: put css code into html file.
