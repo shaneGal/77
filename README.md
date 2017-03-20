@@ -14,7 +14,12 @@ To setup the board:
 
 
 
-The program requires the following packages:
+The program requires the following:
+
+Languages:
+	- nodejs
+	
+Packages:
 	- johnny-five
 	- express
 	- socket io
@@ -23,6 +28,14 @@ To install the mentioned packages:
 	- Open console (command prompt).
 	- Use the following line: "npm install johnny-five express socket io".
 
+To compile:
+change directory to programs location
+      Example: nodejs <filename>
+
+Task 1: 
+When a motion is detected the led blinks 
+
+Task 2:
 There are two files: motion.js (acts as a server) and control.html (acts as a client). The server processes input data
 from the PIR and then sends that information to the client. The client then simply displays the result (number of motions,
 number of long motions and number of short motions. The client receives user inputs from the html elements and is emitted
