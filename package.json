@@ -1,0 +1,16 @@
+{
+  "name": "77",
+  "version": "0.0.0",
+  "description": "package file for task1.js and motion.js",
+  "main": "motion.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaneGal/77.git"
+  },
+  "author": "Shane Gallager 22023356 William Nguyen 26000121",
+  "license": "BSD",
+  "readmeFilename": "README.md"
+}
