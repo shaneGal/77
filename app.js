@@ -10,7 +10,7 @@ var io = require("socket.io")(http);    // imports socket.io and creates an inst
 
 
 app.get('/', function(req, res) {  
-        res.sendFile(__dirname + '/control.html');   // pathway to html file
+        res.sendFile(__dirname + '/index.html');   // pathway to html file
 });
   
 
