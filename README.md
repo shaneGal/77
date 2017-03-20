@@ -36,7 +36,7 @@ Task 1:
 When a motion is detected the led blinks 
 
 Task 2:
-There are two files: motion.js (acts as a server) and control.html (acts as a client). The server processes input data
+There are two files: app.js (acts as a server) and index.html (acts as a client). The server processes input data
 from the PIR and then sends that information to the client. The client then simply displays the result (number of motions,
 number of long motions and number of short motions. A long motion is defined as any motion greater than or equal to 5 seconds and a short any motion less than 5 seconds. The client receives user inputs from the html elements and is emitted
 to the server. The server responds accordingly (turn LED/PIR on or off).
